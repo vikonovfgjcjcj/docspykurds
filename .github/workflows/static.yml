@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Интерактивный электронный курс по Python</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 20px 60px;
+    background: #fafafa;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  h1, h2, h3 {
+    color: #306998;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+  nav button {
+    padding: 7px 14px;
+    background: #ddd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #444;
+    transition: background 0.3s;
+  }
+  nav button.active {
+    background: #306998;
+    color: white;
+  }
+  nav button:disabled {
+    background: #bbb;
+    color: #666;
+    cursor: not-allowed;
+  }
+  section {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  }
+  section.active {
+    display: block;
+  }
+  pre {
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  .assignment {
+    background: #dbeafe;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  textarea {
+    width: 100%;
+    height: 160px;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  button.run {
+    margin-top: 10px;
+    background-color: #306998;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  button.run:disabled {
+    background-color: #aaccee;
+    cursor: not-allowed;
+  }
+  #output {
+    background: #222;
+    color: #0f0;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 5px;
+    min-height: 100px;
+    font-family: monospace;
+    white-space: pre-wrap;
+  }
+  .progress-bar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ddd;
+    height: 12px;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 12px;
+    background: #306998;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .navigation-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .navigation-buttons button {
+    background: #306998;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .navigation-buttons button:disabled {
+    background: #aaccee;
+    cursor: not-allowed;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Интерактивный электронный курс по Python</h1>
+  <p>Последовательно изучайте Python с примерами и заданиями — выполняйте код, чтобы перейти к следующему уроку!</p>
+</header>
+
+<nav id="lessonTabs">
+  <button class="active" disabled>Урок 1</button>
+  <button disabled>Урок 2</button>
+  <button disabled>Урок 3</button>
+  <button disabled>Урок 4</button>
+</nav>
+
+<section id="lesson1" class="active">
+  <h2>Урок 1. Введение в Python</h2>
+  <p>Python — высокоуровневый язык программирования с простой, читаемой синтаксисом. Он отлично подходит для начинающих и широко используется в науке о данных, веб-разработке и автоматизации.</p>
+  
+  <h3>Установка и запуск</h3>
+  <p>Вы можете скачать Python с официального сайта (<a href="https://python.org" target="_blank" rel="noopener">python.org</a>) и запустить код в командной строке или в интегрированной среде (IDE).</p>
+  <h3>Пример первой программы:</h3>
+  <pre>print("Привет, мир!")</pre>
+  
+  <p>Эта команда выводит текст "Привет, мир!" на экран.</p>
+  
+  <div class="assignment">
+    Задание: попробуйте самостоятельно вывести любое приветствие с помощью функции <code>print()</code>.
+  </div>
+  
+  <textarea id="code1">print("Привет, Python!")</textarea><br />
+  <button class="run" id="run1">Запустить код</button>
+  <div id="output1"></div>
+</section>
+
+<section id="lesson2">
+  <h2>Урок 2. Переменные и типы данных</h2>
+  <p>Переменные — это имена для хранения информации. Вы можете присваивать значения переменным и использовать их в программах.</p>
+
+  <p>Самые распространённые типы данных:</p>
+  <ul>
+    <li><b>int</b> — целые числа: 1, 42, -7</li>
+    <li><b>float</b> — числа с десятичной точкой: 3.14, -0.001</li>
+    <li><b>str</b> — строки, то есть текст в кавычках: "Привет"</li>
+    <li><b>bool</b> — логические значения: True (истина) и False (ложь)</li>
+  </ul>
+  
+  <h3>Пример использования переменных:</h3>
+  <pre>name = "Андрей"
+age = 30
+isstudent = False
+
+print("Имя:", name)
+print("Возраст:", age)
+print("Студент:", isstudent)
+  </pre>
+  
+  <p>Используйте переменные, чтобы хранить и обрабатывать данные.</p>
+  
+  <div class="assignment">
+    Задание: создайте переменные с вашим именем, возрастом и укажите, студент ли вы. Выведите их на экран.
+  </div>
+  
+  <textarea id="code2">name = "Иван"
+age = 20
+isstudent = True
+
+print("Имя:", name)
+print("Возраст:", age)
+print("Студент:", isstudent)
+</textarea><br />
+  <button class="run" id="run2" disabled>Запустить код</button>
+  <div id="output2"></div>
+</section>
+
+<section id="lesson3">
+  <h2>Урок 3. Условные операторы</h2>
+  <p>Условные операторы позволяют программе принимать решения. В Python для них используется ключевое слово <code>if</code>.</p>
+  
+  <h3>Пример:</h3>
+  <pre>
+age = 18
+if age &gt;= 18:
+    print("Вы совершеннолетний")
+else:
+    print("Вы несовершеннолетний")
+  </pre>
+
+  <p>Если условие в if истинно, выполняется первый блок, иначе — else.</p>
+
+  <div class="assignment">
+    Задание: напишите программу, которая проверит число и выведет, положительное оно, отрицательное или равно нулю.
+  </div>
+  
+  <textarea id="code3">number = 5
+if number &gt; 0:
+    print("Положительное")
+elif number &lt; 0:
+    print("Отрицательное")
+else:
+    print("Ноль")
+  </textarea><br />
+  <button class="run" id="run3" disabled>Запустить код</button>
+  <div id="output3"></div>
+</section>
+
+<section id="lesson4">
+  <h2>Урок 4. Циклы</h2>
+  <p>Циклы помогают повторять действия несколько раз.</p>
+  <p>Самый простой цикл в Python — <code>for</code>:</p>
+  
+  <pre>
+for i in range(1, 6):
+    print(i)
+  </pre>
+  
+  <p>Он выведет числа от 1 до 5.</p>
+  
+  <div class="assignment">
+    Задание: напишите цикл, который выводит все чётные числа от 2 до 10.
+  </div>
+  
+  <textarea id="code4">for i in range(2, 11, 2):
+    print(i)
+  </textarea><br />
+  <button class="run" id="run4" disabled>Запустить код</button>
+  <div id="output4"></div>
+</section>
+
+<div class="navigation-buttons">
+  <button id="prevLesson" disabled>← Назад</button>
+  <button id="nextLesson" disabled>Вперёд →</button>
+</div>
+
+<div class="progress-bar-container" aria-label="Прогресс курса">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- Подключаем Skulpt -->
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
+
+<script>
+const lessonsCount = 4;
+let currentLesson = 1;
+const lessonTabs = document.querySelectorAll('nav button');
+const sections = document.querySelectorAll('section');
+const prevBtn = document.getElementById('prevLesson');
+const nextBtn = document.getElementById('nextLesson');
+const progressBar = document.getElementById('progressBar');
+
+let lessonCompleted = Array(lessonsCount).fill(false);
+lessonCompleted0 = false; // Урок 1 пока не выполнен
+
+/ Отобразить конкретный урок /
+function showLesson(n) {
+  if(n < 1 || n > lessonsCount) return;
+  currentLessonsections.forEach((s, i) => s.classList.toggle('active', (i+1) === n));
+  lessonTabs.forEach((tab, i) => {
+    tab.classList.toggle('active', (i+1) === n);
+    tab.disabled = !lessonCompleted[i-1] && i > 0; // заблокировать табы, если не завершены предыдущие уроки
+  });
+  updateNavigationButtons();
+  updateProgressBar();
+}
+
+/* Обновить стэйт кнопок "вперёд"/"назад" */
+function updateNavigationButtons() {
+  prevBtn.disabled = currentLesson === 1;
+  nextBtn.disabled = !lessonCompleted[currentLesson - 1] || currentLesson === lessonsCount;
+}
+
+/* Обновить полоску прогресса */
+function updateProgressBar() {
+  const completedCount = lessonCompleted.filter(c => c).length;
+  const percent = (completedCount / lessonsCount) * 100;
+  progressBar.style.width = percent + '%';
+}
+
+prevBtn.addEventListener('click', () => {
+  if(currentLesson > 1) showLesson(currentLesson - 1);
+});
+nextBtn.addEventListener('click', () => {
+  if(currentLesson < lessonsCount && lessonCompleted[currentLesson - 1]) showLesson(currentLesson + 1);
+});
+
+/* Запуск кода Python через Skulpt */
+function runPythonCode(codeId, outputId, runButtonId, lessonIndex) {
+  const prog = document.getElementById(codeId).value;
+  const outputDiv = document.getElementById(outputId);
+  const runBtn = document.getElementById(runButtonId);
+
+  outputDiv.innerText = '';
+  runBtn.disabled = true;
+
+  function outf(text) {
+    outputDiv.innerText += text;
+  }
+  function builtinRead(x) {
+    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+      throw "Файл не найден: '"+x+"'";
+    return Sk.builtinFiles["files"][x];
+  }
+
+  Sk.configure({output:outf, read:builtinRead});
+
+  (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = outputId;
+
+  Sk.misceval.asyncToPromise(() => Sk.importMainWithBody("<stdin>", false, prog, true))
+    .then(() => {
+      lessonCompleted[lessonIndex] = true; // зафиксируем, что урок выполнен
+      runBtn.disabled = false;
+
+      // Активируем следующий урок и вкладку
+      if(lessonIndex+1 < lessonsCount){
+        lessonTabs[lessonIndex+1].disabled = false;
+        document.getElementById(`run${lessonIndex+2}`).disabled = false;
+      }
+      updateNavigationButtons();
+      updateProgressBar();
+    })
+    .catch((err) => {
+      outputDiv.innerText = err.toString();
+      runBtn.disabled = false;
+    });
+}
+
+/* Инициализация кнопок запуска кода */
+document.getElementById('run1').addEventListener('click', () => {
+  runPythonCode('code1', 'output1', 'run1', 0);
+});
+
+// Урок 2 запуск кнопки блокирован, до выполнения урока 1
+document.getElementById('run2').addEventListener('click', () => {
+  runPythonCode('code2', 'output2', 'run2', 1);
+});
+// Урок 3
+document.getElementById('run3').addEventListener('click', () => {
+  runPythonCode('code3', 'output3', 'run3', 2);
+});
+// Урок 4
+document.getElementById('run4').addEventListener('click', () => {
+  runPythonCode('code4', 'output4', 'run4', 3);
+});
+
+// Управление вкладками отключено для предотвращения прыжков без выполнения кода,
+// но добавим обработчик навигации по табам по клику с проверкой:
+lessonTabs.forEach((btn, index) => {
+  btn.addEventListener('click', () => {
+    if(index === 0 || lessonCompleted[index-1]){
+      showLesson(index+1);
+    } else {
+      alert('Пожалуйста, выполните текущие задания, чтобы перейти дальше.');
+    }
+  });
+});
+
+// Изначально разблокируем урок 1 и кнопку запуска кода для него
+lessonTabs[0].disabled = false;
+document.getElementById('run1').disabled = false;
+
+updateProgressBar();
+updateNavigationButtons();
+</script>
+
+</body>
+</html>
